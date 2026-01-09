@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark h-full">
     <head>
         @include('partials.head')
         <link rel="icon" href="{{ asset('img/icone.png') }}" type="image/png">
     </head>
-    <body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased relative selection:bg-blue-600 selection:text-white">
+    
+    <body class="h-full min-h-screen bg-zinc-950 text-zinc-100 antialiased selection:bg-blue-600 selection:text-white flex items-start overflow-x-hidden">
         
         <div class="fixed top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 blur-[100px] rounded-full -z-10 pointer-events-none"></div>
         <div class="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] -z-20 pointer-events-none"></div>
 
-        <flux:sidebar sticky stashable class="border-r border-zinc-800 bg-zinc-900/60 backdrop-blur-xl">
+        <flux:sidebar sticky stashable class="min-h-screen border-r border-zinc-800 bg-zinc-900/60 backdrop-blur-xl py-6">
             
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse mb-6" wire:navigate>
+            <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse mb-8 pl-2" wire:navigate>
                 <img src="{{ asset('img/logo.png') }}" alt="ATLVS" class="h-10 w-auto">
             </a>
 
@@ -36,8 +37,7 @@
 
             <flux:spacer />
 
-            <div class="w-full border-t border-zinc-800 pt-5 mt-2">
-                
+            <div class="w-full border-t border-zinc-800 pt-5 mt-4">
                 <flux:dropdown class="hidden lg:block w-full" position="bottom" align="start">
                     <flux:profile
                         :name="auth()->user()->name"
@@ -62,11 +62,9 @@
                                 </div>
                             </div>
                         </flux:menu.radio.group>
-
                         <flux:menu.separator class="bg-zinc-800"/>
                         <flux:menu.item :href="route('profile.edit')" icon="cog" wire:navigate>{{ __('Configurações') }}</flux:menu.item>
                         <flux:menu.separator class="bg-zinc-800"/>
-
                         <form method="POST" action="{{ route('logout') }}" class="w-full">
                             @csrf
                             <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
@@ -75,12 +73,10 @@
                         </form>
                     </flux:menu>
                 </flux:dropdown>
-                
                 <div class="text-[10px] text-zinc-600 mt-3 text-center lg:text-left px-1">
                     ATLVS v1.0 &copy; {{ date('Y') }}
                 </div>
             </div>
-
         </flux:sidebar>
 
         <flux:header class="lg:hidden bg-zinc-900 border-b border-zinc-800">
@@ -99,9 +95,11 @@
             </flux:dropdown>
         </flux:header>
 
-        <flux:main class="relative z-10">
-            {{ $slot }}
-        </flux:main>
+        <div class="flex-1 min-w-0 min-h-screen">
+            <flux:main class="!pt-8 !mt-0 w-full !max-w-none">
+                {{ $slot }}
+            </flux:main>
+        </div>
 
         @fluxScripts
     </body>
