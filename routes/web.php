@@ -19,9 +19,7 @@ Route::view('/', 'welcome')->name('home');
 | Contato (Landing Page)
 |--------------------------------------------------------------------------
 */
-Route::get('/contato', function () {
-    return redirect('/#contato');
-});
+Route::view('/contato', 'contact')->name('contact');
 
 Route::post('/contato', [ContactController::class, 'send'])
     ->name('contact.send');
