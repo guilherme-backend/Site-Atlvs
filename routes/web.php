@@ -3,13 +3,27 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
+
+// Controllers Públicos e Gerais
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\Dashboard\ContactController as DashboardContactController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjectController; // Controller do Cliente
+use App\Http\Controllers\ProjectCommentController;
+
+// Controllers do Admin
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\ProjectCommentController;
+use App\Http\Controllers\Dashboard\ContactController as DashboardContactController; // Leads
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController; // Alias para evitar conflito
+
+/*
+|--------------------------------------------------------------------------
+| ÁREA PÚBLICA (Site Institucional)
+|--------------------------------------------------------------------------
+*/
+Route::view('/', 'welcome')->name('home');
+Route::view('/contato', 'contact')->name('contact');
+Route::post('/contato', [ContactController::class, 'send'])->name('contact.send');
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +37,30 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/admin/logout', [AdminLoginController::class, 'destroy'])->name('admin.logout');
 
-Route::post('/projetos/{project}/comentarios', [ProjectCommentController::class, 'store'])->name('projects.comments.store');
 
 /*
 |--------------------------------------------------------------------------
-| ÁREA ADMINISTRATIVA (Protegida por Cargo)
+| ROTAS AUTENTICADAS GERAIS (Admin + Cliente)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified'])->group(function () {
+    
+    // --- INTERAÇÕES NO PROJETO (CHAT) ---
+    // Serve tanto para o Admin quanto para o Cliente
+    
+    // Enviar Mensagem
+    Route::post('/projetos/{project}/comentarios', [ProjectCommentController::class, 'store'])
+        ->name('projects.comments.store');
+
+    // [NOVA ROTA] Atualização Automática (Polling)
+    Route::get('/projects/{project}/messages', [ProjectCommentController::class, 'indexMessages'])
+        ->name('projects.comments.index');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| ÁREA ADMINISTRATIVA (Protegida por Cargo 'admin')
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(function () {
@@ -39,25 +72,12 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('/leads', [DashboardContactController::class, 'index'])->name('admin.leads');
     Route::patch('/leads/{contact}/toggle', [DashboardContactController::class, 'toggleRead'])->name('admin.leads.toggle');
 
-    // 3. Gestão de Projetos
-    Route::get('/projetos', [App\Http\Controllers\Admin\ProjectController::class, 'index'])->name('admin.projects.index');
-    Route::get('/projetos/{project}', [App\Http\Controllers\Admin\ProjectController::class, 'show'])->name('admin.projects.show');
-    Route::put('/projetos/{project}', [App\Http\Controllers\Admin\ProjectController::class, 'update'])->name('admin.projects.update');
-    Route::post('/projetos/{project}/comentarios', [ProjectCommentController::class, 'store'])->name('projects.comments.store');
-
+    // 3. Gestão de Projetos (Visão do Admin)
+    // Note que usamos o AdminProjectController aqui
+    Route::get('/projetos', [AdminProjectController::class, 'index'])->name('admin.projects.index');
+    Route::get('/projetos/{project}', [AdminProjectController::class, 'show'])->name('admin.projects.show');
+    Route::put('/projetos/{project}', [AdminProjectController::class, 'update'])->name('admin.projects.update');
 });
-
-
-/*
-|--------------------------------------------------------------------------
-| ÁREA PÚBLICA (Site Institucional)
-|--------------------------------------------------------------------------
-*/
-Route::view('/', 'welcome')->name('home');
-Route::view('/contato', 'contact')->name('contact');
-
-// IMPORTANTE: Aqui definimos o nome da rota como 'contact.send'
-Route::post('/contato', [ContactController::class, 'send'])->name('contact.send');
 
 
 /*
@@ -70,7 +90,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 1. Dashboard Principal
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // 2. Meus Projetos
+    // 2. Meus Projetos (Visão do Cliente)
     Route::get('/meus-projetos', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/meus-projetos/novo', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/meus-projetos', [ProjectController::class, 'store'])->name('projects.store');
@@ -80,7 +100,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| CONFIGURAÇÕES DO USUÁRIO
+| CONFIGURAÇÕES DO USUÁRIO (Perfil, Senha, 2FA)
 |--------------------------------------------------------------------------
 */
 Route::middleware('auth')->group(function () {
