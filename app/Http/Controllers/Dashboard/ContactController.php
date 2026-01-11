@@ -34,4 +34,17 @@ class ContactController extends Controller
         $contact->delete();
         return back()->with('success', 'Mensagem excluída com sucesso.');
     }
+
+    // ... métodos index, toggleRead e destroy existentes ...
+
+    public function show(Contact $contact)
+    {
+        // Se a mensagem ainda não foi lida, marca como lida ao abrir
+        if (!$contact->is_read) {
+            $contact->update(['is_read' => true]);
+        }
+
+        return view('dashboard.contacts.show', compact('contact'));
+    }
+
 }

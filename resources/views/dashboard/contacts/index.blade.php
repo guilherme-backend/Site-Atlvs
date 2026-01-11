@@ -51,12 +51,17 @@
                                         <div class="text-xs text-slate-600 mt-1">{{ $contact->phone }}</div>
                                     @endif
                                 </td>
+                                
+                                {{-- COLUNA CLICÁVEL: Assunto e Mensagem --}}
                                 <td class="px-6 py-4 max-w-md">
-                                    <div class="font-bold text-slate-200 mb-1">{{ $contact->subject }}</div>
-                                    <div class="text-slate-400 text-xs leading-relaxed line-clamp-2 group-hover:line-clamp-none transition-all">
-                                        {{ $contact->message }}
-                                    </div>
+                                    <a href="{{ route('admin.leads.show', $contact) }}" class="block group-hover:text-blue-400 transition-colors">
+                                        <div class="font-bold text-slate-200 mb-1">{{ $contact->subject }}</div>
+                                        <div class="text-slate-400 text-xs leading-relaxed line-clamp-2">
+                                            {{ $contact->message }}
+                                        </div>
+                                    </a>
                                 </td>
+
                                 <td class="px-6 py-4 text-xs whitespace-nowrap">
                                     <div class="text-slate-300">{{ $contact->created_at->format('d/m/Y') }}</div>
                                     <div class="text-slate-600">{{ $contact->created_at->format('H:i') }}</div>

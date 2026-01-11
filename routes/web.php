@@ -78,6 +78,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
 
     // 3. Gestão de Projetos (Visão do Admin)
     Route::get('/projetos', [AdminProjectController::class, 'index'])->name('admin.projects.index');
+    Route::get('/leads/{contact}', [DashboardContactController::class, 'show'])->name('admin.leads.show');
     Route::get('/projetos/{project}', [AdminProjectController::class, 'show'])->name('admin.projects.show');
     Route::put('/projetos/{project}', [AdminProjectController::class, 'update'])->name('admin.projects.update');
 
