@@ -51,7 +51,7 @@
                     </flux:navlist.group>
                     
                     <flux:navlist.group :heading="__('Atendimento')" class="grid mt-4 text-slate-400">
-                        <flux:navlist.item icon="chat-bubble-left-right" href="#">{{ __('Meus Chamados') }}</flux:navlist.item>
+                        <flux:navlist.item icon="chat-bubble-left-right" href="{{ route('tickets.index') }}">{{ __('Meus Chamados') }}</flux:navlist.item>
                     </flux:navlist.group>
                 @endif
 
