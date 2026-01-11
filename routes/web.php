@@ -114,6 +114,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/meus-chamados/{ticket}', [TicketController::class, 'show'])->name('tickets.show');
     Route::post('/meus-chamados/{ticket}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
     Route::get('/meus-chamados/{ticket}/messages', [TicketController::class, 'indexMessages'])->name('tickets.messages');
+
+    // Rota para Documentação
+    Route::view('/documentacao-api', 'docs.api')->name('docs.api');
 });
     
 // Sidebar Gestão (Financeiro, Contratos)

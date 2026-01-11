@@ -101,13 +101,46 @@
                 </a>
             </div>
 
-            <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 shadow-lg shadow-black/20">
-                <h3 class="font-bold text-white mb-4 text-xs uppercase tracking-wide">Acesso Rápido</h3>
-                <ul class="space-y-3 text-sm text-slate-400">
-                    <li><a href="#" class="hover:text-blue-400 flex items-center gap-2 transition-colors"><span class="w-1.5 h-1.5 bg-slate-600 rounded-full"></span> Documentação da API</a></li>
-                    <li><a href="#" class="hover:text-blue-400 flex items-center gap-2 transition-colors"><span class="w-1.5 h-1.5 bg-slate-600 rounded-full"></span> Segunda Via de Boleto</a></li>
-                    <li><a href="{{ route('profile.edit') }}" class="hover:text-blue-400 flex items-center gap-2 transition-colors"><span class="w-1.5 h-1.5 bg-slate-600 rounded-full"></span> Alterar Senha</a></li>
-                </ul>
+            {{-- Seção de Links Úteis --}}
+            <div class="mt-6">
+                <h4 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Acesso Rápido</h4>
+                <div class="space-y-3">
+                    
+                    {{-- 1. Documentação da API --}}
+                    {{-- Nota: Certifique-se de criar a view 'docs.api' ou mude o href para um link externo --}}
+                    <a href="{{ Route::has('docs.api') ? route('docs.api') : '#' }}" class="flex items-center justify-between p-3 bg-slate-900/50 border border-slate-800 rounded-xl hover:bg-slate-800 hover:border-slate-700 transition-all group">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 bg-slate-800 rounded-lg text-slate-400 group-hover:text-blue-400 transition-colors">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                            </div>
+                            <span class="text-sm font-medium text-slate-300 group-hover:text-white">Documentação da API</span>
+                        </div>
+                        <svg class="w-4 h-4 text-slate-600 group-hover:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+
+                    {{-- 2. Segunda Via de Boleto (Financeiro) --}}
+                    <a href="{{ route('gestao.financeiro.index') }}" class="flex items-center justify-between p-3 bg-slate-900/50 border border-slate-800 rounded-xl hover:bg-slate-800 hover:border-slate-700 transition-all group">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 bg-slate-800 rounded-lg text-slate-400 group-hover:text-emerald-400 transition-colors">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            </div>
+                            <span class="text-sm font-medium text-slate-300 group-hover:text-white">Segunda Via de Boleto</span>
+                        </div>
+                        <svg class="w-4 h-4 text-slate-600 group-hover:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+
+                    {{-- 3. Alterar Senha --}}
+                    <a href="{{ route('user-password.edit') }}" class="flex items-center justify-between p-3 bg-slate-900/50 border border-slate-800 rounded-xl hover:bg-slate-800 hover:border-slate-700 transition-all group">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 bg-slate-800 rounded-lg text-slate-400 group-hover:text-purple-400 transition-colors">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            </div>
+                            <span class="text-sm font-medium text-slate-300 group-hover:text-white">Alterar Senha</span>
+                        </div>
+                        <svg class="w-4 h-4 text-slate-600 group-hover:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+
+                </div>
             </div>
         </div>
     </div>
