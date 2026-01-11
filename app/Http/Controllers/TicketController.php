@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\TicketMessage;
 
 class TicketController extends Controller
 {
@@ -79,4 +80,16 @@ class TicketController extends Controller
 
         return back()->with('success', 'Mensagem enviada!');
     }
+
+    // 6. Polling de Mensagens (Cliente)
+    public function indexMessages(Ticket $ticket)
+    {
+        if ($ticket->user_id !== Auth::id()) {
+            abort(403);
+        }
+        
+        // Retorna apenas a "view parcial" das mensagens
+        return view('tickets.partials.messages', compact('ticket'));
+    }
+
 }

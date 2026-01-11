@@ -79,6 +79,14 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('/projetos', [AdminProjectController::class, 'index'])->name('admin.projects.index');
     Route::get('/projetos/{project}', [AdminProjectController::class, 'show'])->name('admin.projects.show');
     Route::put('/projetos/{project}', [AdminProjectController::class, 'update'])->name('admin.projects.update');
+
+    // --- CHAMADOS (SUPORTE) ---
+    Route::get('/chamados', [App\Http\Controllers\Admin\TicketController::class, 'index'])->name('admin.tickets.index');
+    Route::get('/chamados/{ticket}', [App\Http\Controllers\Admin\TicketController::class, 'show'])->name('admin.tickets.show');
+    Route::post('/chamados/{ticket}/reply', [App\Http\Controllers\Admin\TicketController::class, 'reply'])->name('admin.tickets.reply');
+    Route::patch('/chamados/{ticket}/status', [App\Http\Controllers\Admin\TicketController::class, 'updateStatus'])->name('admin.tickets.status');
+    Route::get('/chamados/{ticket}/messages', [App\Http\Controllers\Admin\TicketController::class, 'indexMessages'])->name('admin.tickets.messages');
+
 });
 
 
@@ -104,6 +112,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/meus-chamados', [TicketController::class, 'store'])->name('tickets.store');
     Route::get('/meus-chamados/{ticket}', [TicketController::class, 'show'])->name('tickets.show');
     Route::post('/meus-chamados/{ticket}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
+    Route::get('/meus-chamados/{ticket}/messages', [TicketController::class, 'indexMessages'])->name('tickets.messages');
 });
     
 // Sidebar Gestão (Financeiro, Contratos)

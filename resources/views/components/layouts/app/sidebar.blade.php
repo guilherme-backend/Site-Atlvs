@@ -36,6 +36,7 @@
                 @if(auth()->user()->role === 'admin')
                     <flux:navlist.group :heading="__('Gestão ATLVS')" class="grid text-slate-400">
                         <flux:navlist.item icon="chart-bar" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>Dashboard</flux:navlist.item>
+                        <flux:navlist.item icon="chat-bubble-left-right" :href="route('admin.tickets.index')" :current="request()->routeIs('admin.tickets*')" wire:navigate>Central de Suporte</flux:navlist.item>
                         <flux:navlist.item icon="inbox-arrow-down" :href="route('admin.leads')" :current="request()->routeIs('admin.leads*')" wire:navigate>Leads & Contatos</flux:navlist.item>
                         <flux:navlist.item icon="briefcase" :href="route('admin.projects.index')" :current="request()->routeIs('admin.projects.*')" wire:navigate>Todos os Projetos</flux:navlist.item>
                     </flux:navlist.group>
