@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
+use App\Events\MessageSent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,11 +31,13 @@ class TicketController extends Controller
         $request->validate(['message' => 'required|string']);
 
         // Salva a mensagem do Admin
-        TicketMessage::create([
+        $message = TicketMessage::create([
             'ticket_id' => $ticket->id,
             'user_id' => Auth::id(),
             'message' => $request->message,
         ]);
+
+        broadcast(new MessageSent($message))->toOthers();
 
         // Muda status para 'Respondido' automaticamente e atualiza data
         $ticket->update([

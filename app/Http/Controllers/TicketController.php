@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TicketMessage;
+use App\Events\MessageSent;
 
 class TicketController extends Controller
 {
@@ -74,15 +75,13 @@ class TicketController extends Controller
             abort(403);
         }
 
-        $request->validate(['message' => 'required|string']);
-
-        TicketMessage::create([
+        $request->validate(['message' => 'required|string']);        $message = TicketMessage::create([
             'ticket_id' => $ticket->id,
             'user_id' => Auth::id(),
             'message' => $request->message,
         ]);
 
-        // Se foi o admin respondendo, muda status para 'respondido'
+        broadcast(new MessageSent($message))->toOthers(); // Se foi o admin respondendo, muda status para 'respondido'
         // Se foi o cliente, muda para 'aberto' (pendente de análise)
         $ticket->update([
             'status' => Auth::user()->role === 'admin' ? 'respondido' : 'aberto'

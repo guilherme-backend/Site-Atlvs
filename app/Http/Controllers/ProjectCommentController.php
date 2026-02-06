@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Project;
 use App\Models\ProjectComment;
 use App\Mail\ProjectCommentMail;
+use App\Events\ProjectMessageSent;
 
 class ProjectCommentController extends Controller
 {
@@ -22,6 +23,8 @@ class ProjectCommentController extends Controller
             'user_id' => auth()->id(),
             'content' => $validated['content'],
         ]);
+
+        broadcast(new ProjectMessageSent($comment))->toOthers();
 
         // === CORREÇÃO DE SEGURANÇA ===
         // Carrega os dados do Projeto e do Usuário para dentro da variável $comment
