@@ -28,7 +28,8 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex h-20 items-center justify-between md:justify-start">
                     
-                    <div class="flex-shrink-0 flex items-center">
+                    {{-- LOGO --}}
+                    <div class="flex-shrink-0 flex items-center mr-32">
                         <a href="{{ route('home') }}" class="flex items-center">
                             {{-- Logo com tamanho controlado e brilho azulado --}}
                             <img src="{{ asset('img/logo.png') }}" alt="Logo ATLVS" class="h-10 w-auto mr-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] object-contain">
@@ -36,8 +37,9 @@
                         </a>
                     </div>
 
-                    <div class="hidden md:flex items-center flex-1 ml-12">
-                        <div class="flex space-x-8">
+                    {{-- MENU DESKTOP --}}
+                    <div class="hidden md:flex items-center flex-1 ml-32">
+                        <div class="flex space-x-8"> 
                             <a href="{{ route('home') }}#solucoes" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Soluções</a>
                             <a href="{{ route('home') }}#setores" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Setores</a>
                             <a href="{{ route('home') }}#sobre" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">A Empresa</a>

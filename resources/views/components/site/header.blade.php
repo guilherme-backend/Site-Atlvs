@@ -3,7 +3,7 @@
 
         <!-- Logo -->
         <div class="font-bold text-xl">
-            <span class="text-cyan-400">ATL</span>VS
+            <span class="text-cyan-400">ATLVS</span>
         </div>
 
         <!-- Navegação -->

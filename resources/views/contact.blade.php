@@ -102,7 +102,7 @@
                             </div>
                             <div>
                                 <p class="text-xs text-zinc-500 font-medium uppercase tracking-wider mb-0.5">Paracambi - RJ</p>
-                                <p class="text-zinc-200 font-medium">Casa do Juan - 26600-000</p>
+                                <p class="text-zinc-200 font-medium">Rua Dr Nilo Peçanha Nº 815 - 26600-000</p>
                             </div>
                         </div>
                     </div>
