@@ -137,7 +137,7 @@
                 <div class="bg-gradient-to-br from-blue-900/20 to-zinc-900 border border-blue-500/20 rounded-2xl p-6">
                     <h3 class="text-blue-400 text-sm font-bold mb-2">Precisa de ajuda urgente?</h3>
                     <p class="text-xs text-zinc-400 mb-4">Se houver algum problema crítico, entre em contato direto pelo e-mail.</p>
-                    <a href="mailto:contato@atlvs.com.br" class="text-xs text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg inline-block transition-colors">
+                    <a href="mailto:atlvs.dev@gmail.com" class="text-xs text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg inline-block transition-colors">
                         Enviar E-mail
                     </a>
                 </div>

@@ -86,7 +86,7 @@
                     <div class="space-y-6">
                         <h3 class="text-xl font-bold text-white mb-6 pl-2 border-l-4 border-blue-600">Canais Diretos</h3>
                         
-                        <a href="mailto:contato@atlvs.com.br" class="flex items-center gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800 hover:border-blue-500/30 hover:bg-zinc-800/50 transition-all group">
+                        <a href="mailto:atlvs.dev@gmail.com" class="flex items-center gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800 hover:border-blue-500/30 hover:bg-zinc-800/50 transition-all group">
                             <div class="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center text-blue-400 group-hover:text-white group-hover:bg-blue-600 transition-all shadow-lg">
                                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             </div>

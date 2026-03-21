@@ -35,7 +35,7 @@ class ProjectCommentController extends Controller
         try {
             if (auth()->id() === $project->user_id) {
                 // Se foi o Cliente que mandou, avisa a ATLVS
-                Mail::to('contato@atlvs.com.br')->send(new ProjectCommentMail($comment));
+                Mail::to('atlvs.dev@gmail.com')->send(new ProjectCommentMail($comment));
             } else {
                 // Se foi a ATLVS que mandou, avisa o Cliente
                 Mail::to($project->user->email)->send(new ProjectCommentMail($comment));
